@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="NetUtilities.Views.Components.BarcodeImage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             Width="auto" 
+             Height="auto">
+    <Grid>
+        
+        <Border 
+            Width="auto" 
+            Height="auto" 
+            Margin="40 0 40 0" 
+            CornerRadius="10"
+            Background="{DynamicResource RegionBrush}"
+            Effect="{StaticResource EffectShadow1}"
+            Grid.Row="0">
+            
+            <Grid>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                
+                <Image
+                    Margin="20"
+                    Grid.Row="0"
+                    x:Name="BarcodeImageControl"
+                    Source="{Binding BarcodeImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    Stretch="Uniform"
+                    AllowDrop="True"/>
+
+                <Border
+                    CornerRadius="0 0 10 10"
+                    Background="#326cf3"
+                    Grid.Row="1">
+
+                    <StackPanel 
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+
+                        <TextBlock
+                            Text="barcode type: "
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            FontWeight="Bold"
+                            FontSize="16"
+                            Foreground="White"/>
+
+                        <TextBlock
+                            x:Name="barcodeType"
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            FontWeight="Bold"
+                            FontSize="16"
+                            Foreground="White"/>
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+    
+</UserControl>

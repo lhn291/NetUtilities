@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="NetUtilities.ViewModels.Formatters.JsonFormat"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetUtilities.ViewModels.Formatters" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             Width="auto"
+             Height="auto">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Button 
+            HorizontalAlignment="Left"
+            Grid.Row="0" 
+            Margin="20 15 0 0"
+            Style="{StaticResource ClickButton}"
+            Effect="{StaticResource EffectShadow2}"
+            Command="{Binding FormatJSONCommand}"
+            Content="Process"
+            FontSize="15"
+            Width="120" 
+            Height="35"/>
+        
+        <ComboBox 
+            Style="{StaticResource ComboBoxStyle}"
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            x:Name="MyComboBox" 
+            Width="110" 
+            Height="30" 
+            Margin="0 10 20 0"
+            ItemsSource="{Binding SpaceTabs}" 
+            SelectedValue="{Binding SpaceTab}" 
+            BorderBrush="{StaticResource LightPrimaryBrush}" 
+            FontSize="15" 
+            FontWeight="DemiBold" 
+            Background="{DynamicResource RegionBrush}"
+            Effect="{StaticResource EffectShadow2}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SpaceTabsCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+        
+        <Border 
+            Width="auto" 
+            Height="auto" 
+            Padding="20"
+            Margin="20 15 20 0" 
+            CornerRadius="10"
+            Background="{DynamicResource RegionBrush}"
+            Effect="{StaticResource EffectShadow1}"
+            Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBox
+                    Height="Auto"
+                    Width="Auto"
+                    BorderThickness="0"
+                    FontSize="13"
+                    Text="{Binding InputData}"
+                    TextWrapping="Wrap"
+                    FocusVisualStyle="{x:Null}"/>
+            </ScrollViewer>
+        </Border>
+        
+        <TextBlock
+            FontWeight="Bold"
+            FontSize="15"
+            HorizontalAlignment="Left"
+            Margin="25 15 0 0"
+            Text="Output"
+            Grid.Row="2"/>
+        
+        <Border 
+            Margin="20 10 20 20" 
+            Padding="20"
+            Width="auto" 
+            Height="auto" 
+            CornerRadius="10"
+            Grid.Row="3" 
+            Background="{DynamicResource RegionBrush}"
+            Effect="{StaticResource EffectShadow1}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBox
+                    Height="Auto"
+                    Width="Auto"
+                    BorderThickness="0"
+                    FontSize="13"
+                    Text="{Binding OutputData}"
+                    TextWrapping="Wrap"
+                    FocusVisualStyle="{x:Null}"
+                    IsReadOnly="True" />
+            </ScrollViewer>
+        </Border>
+        
+    </Grid>
+</UserControl>

@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="NetUtilities.Views.Components.LogItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetUtilities.Views.Components"
+             mc:Ignorable="d">
+    <Border 
+        x:Name="border" 
+        BorderThickness="0.3 .5 1.5 2" 
+        BorderBrush="#C0C0C0" 
+        CornerRadius="3"
+        Margin="2">
+        
+        <Grid
+            PreviewMouseLeftButtonDown="MessageTextBlock_MouseLeftButtonDown"
+            MinHeight="45" 
+            MinWidth="900">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="145"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border 
+                Name="bdButton"
+                Margin="10 10 0 0"
+                Width="24" 
+                Height="24" 
+                CornerRadius="12" 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Padding="6"
+                Grid.Column="0">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#EEEEEE"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Button
+                    MouseLeftButtonDown="MessageTextBlock_MouseLeftButtonDown"
+                    Effect="{StaticResource EffectShadow1}"
+                    Width="12" 
+                    Height="12"
+                    FocusVisualStyle="{x:Null}" 
+                    Style="{DynamicResource OpacityButtonStyle2}"
+                    BorderBrush="Transparent">
+                    <Button.Background>
+                        <ImageBrush x:Name="buttonImageBrush" ImageSource="pack://siteoforigin:,,,/Resources/Images/un_show_icon.png" Stretch="UniformToFill" />
+                    </Button.Background>
+                </Button>
+            </Border>
+            
+            <TextBlock 
+                Grid.Column="1"
+                Margin="0 13 4 3"
+                FontSize="14"
+                Style="{StaticResource LeverColor}"
+                Text="{Binding Level}"/>
+            
+            <TextBlock 
+                Grid.Column="2"
+                Margin="5 13 10 3"
+                FontSize="14"
+                Text="{Binding DateLog, StringFormat=yyyy-MM-dd HH:mm:ss}"/>
+            
+            <TextBlock 
+                MaxHeight="300"
+                Grid.Column="3">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        Margin="10 13 10 5"
+                        FontSize="14"
+                        TextWrapping="Wrap" 
+                        Text="{Binding Content}"
+                        x:Name="MessageTextBlock" >                        
+                    </TextBlock>
+                </ScrollViewer>
+            </TextBlock>
+            
+        </Grid>
+    </Border>
+</UserControl>
+

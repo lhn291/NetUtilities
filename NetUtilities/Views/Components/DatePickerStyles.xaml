@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="NetUtilities.Views.Components.DatePickerStyles"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetUtilities.Views.Components" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             Width="170" Height="25">
+    <Canvas>
+        <DatePicker x:Name="custom_date_picker"
+                Padding="0 0 0 3"
+                Margin="0 0 18 0"
+                FontWeight="Bold"
+                Width="170"
+                Height="25"
+                FontSize="13"
+                VerticalAlignment="Center"
+                Style="{StaticResource DatePickerCustom}"
+                SelectedDateChanged="custom_date_picker_SelectedDateChanged"
+                SelectedDate="{Binding DateSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedDateChanged">
+                    <i:InvokeCommandAction Command="{Binding LogDateChangedCommand, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DatePicker.CalendarStyle>
+                <Style TargetType="{x:Type Calendar}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Calendar}">
+                                <Viewbox Width="320" Height="320">
+                                    <Grid x:Name="PART_Root" Background="Transparent">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <CalendarItem 
+                                                x:Name="PART_CalendarItem" 
+                                                Grid.Row="0"
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                                Background="{TemplateBinding Background}" 
+                                                Style="{TemplateBinding CalendarItemStyle}"
+                                                Height="Auto"
+                                                Width="Auto"/>
+                                        <Grid Grid.Row="0" Margin="0 147 0 5">
+                                            <Border 
+                                                BorderBrush="Transparent" 
+                                                BorderThickness="2" 
+                                                CornerRadius="10">
+                                                
+                                                <StackPanel
+                                                    Margin="3 0 2 0"
+                                                    Orientation="Horizontal"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock 
+                                                            Text="Hour" 
+                                                            FontSize="9" 
+                                                            Margin="0 3 0 2"/>
+
+                                                        <ComboBox
+                                                            x:Name="cbx_hour"
+                                                            ItemsSource="{Binding HourItems, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}"
+                                                            SelectedItem="{Binding SelectedHour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}"
+                                                            Effect="{StaticResource EffectShadow2}"
+                                                            FontSize="9"
+                                                            Width="50"
+                                                            Height="17"
+                                                            Style="{StaticResource ComboBoxStyle}"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock 
+                                                            Text="Minute" 
+                                                            FontSize="9" 
+                                                            Margin="0 3 0 2"/>
+                                                        <ComboBox
+                                                            x:Name="cbx_minute"
+                                                            ItemsSource="{Binding MinuteItems, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}"
+                                                            Effect="{StaticResource EffectShadow2}"
+                                                            FontSize="9"
+                                                            Width="50"
+                                                            Height="17"
+                                                            Style="{StaticResource ComboBoxStyle}"
+                                                            SelectedItem="{Binding SelectedMinute , Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock 
+                                                            Text="Second" 
+                                                            FontSize="9" 
+                                                            Margin="0 3 0 2"/>
+                                                        <ComboBox
+                                                            x:Name="cbx_second"
+                                                            ItemsSource="{Binding SecondItems, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}"
+                                                            Effect="{StaticResource EffectShadow2}"
+                                                            FontSize="9"
+                                                            Width="50"
+                                                            Height="17"
+                                                            Style="{StaticResource ComboBoxStyle}"
+                                                            SelectedItem="{Binding SelectedSecond , Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type local:DatePickerStyles}}}"/>
+                                                    </StackPanel>
+
+                                                    <Button 
+                                                        Margin="5 16 3 0"
+                                                        FontSize="9"
+                                                        Click="clean_button_Click"
+                                                        x:Name="clean_button"
+                                                        Width="40"
+                                                        Content="Clear"
+                                                        Height="19"
+                                                        FocusVisualStyle="{x:Null}"
+                                                        BorderBrush="Transparent">
+                                                    </Button>
+                                                    
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </Viewbox>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DatePicker.CalendarStyle>
+        </DatePicker>
+    </Canvas>
+    
+</UserControl>
